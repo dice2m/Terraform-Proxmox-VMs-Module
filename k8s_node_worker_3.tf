@@ -1,5 +1,5 @@
 module "k8s_node_worker_3" {
-  source = "./modules/vm"
+  source         = "./modules/vm"
   vm_count       = var.k8s_node_worker_3["vm_count"]
   vmid           = var.k8s_node_worker_3["vmid"]
   target_node    = var.k8s_node_worker_3["target_node"]
