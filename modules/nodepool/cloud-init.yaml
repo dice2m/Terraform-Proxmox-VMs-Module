@@ -1,0 +1,24 @@
+#cloud-config
+
+# Users configuration
+
+#cloud-config
+users:
+  - name: zero
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3Nza...your_ssh_public_key_here
+
+  - name: root
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3Nza...your_ssh_public_key_here
+
+
+# Disable password authentication over SSH (optional, for increased security)
+ssh_pwauth: false
+
+# Ensure the SSH service is running
+runcmd:
+  - systemctl restart sshd

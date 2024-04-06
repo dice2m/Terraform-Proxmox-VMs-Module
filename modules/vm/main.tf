@@ -2,11 +2,10 @@ terraform {
   required_providers {
     proxmox = {
       source  = "thegameprofi/proxmox"
-      version = "2.10.0"
+      version = "2.10.0" # Specify the version you want to use
     }
   }
 }
-
 
 resource "proxmox_vm_qemu" "vm" {
   count         = var.vm_count
