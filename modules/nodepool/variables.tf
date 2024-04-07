@@ -14,24 +14,19 @@ variable "name_prefix" {
 }
 
 variable "name_format" {
-  description = "The format to apply to VM names, used in conjunction with the name_prefix."
+  description = "The format string to use for naming VMs, applied after the prefix."
   type        = string
-  default     = "%02d" // Default to 2-digit numbering if not specified
+  default     = "%03d"
 }
 
 variable "target_nodes" {
-  description = "The list of Proxmox cluster nodes where the VMs will be created, distributed evenly across these nodes."
+  description = "A list of Proxmox cluster nodes where the VMs will be created, distributed evenly across these nodes."
   type        = list(string)
 }
 
 variable "template_name" {
   description = "The VM template name to clone for creating new VMs."
   type        = string
-}
-
-variable "agent_enabled" {
-  description = "Specifies if the QEMU guest agent should be enabled."
-  type        = bool
 }
 
 variable "cores" {
@@ -75,8 +70,9 @@ variable "storage_name" {
 }
 
 variable "iothread_enabled" {
-  description = "Enable or disable IO threads."
+  description = "Enable or disable IO threads. Set to true to enable, false to disable."
   type        = bool
+  default     = true
 }
 
 variable "network_model" {

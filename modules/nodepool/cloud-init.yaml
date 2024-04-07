@@ -13,7 +13,7 @@ users:
 
   - name: root
     ssh_authorized_keys:
-      - ssh-rsa AAAAB3Nza...your_ssh_public_key_here
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN6wVo+em+jQqJSqDClwUqycqzGbrLr/R1uH2WG+cNyI dimit@brsk04-fjk-win
 
 
 # Disable password authentication over SSH (optional, for increased security)

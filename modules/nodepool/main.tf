@@ -15,7 +15,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
   clone         = var.template_name
   full_clone    = true
   os_type       = "cloud-init"
-  agent         = var.agent_enabled
+  agent         = 1  # Agent always enabled
   cores         = var.cores
   sockets       = var.sockets
   cpu           = var.cpu_type
@@ -28,7 +28,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
     size        = var.disk_size
     type        = "scsi"
     storage     = var.storage_name
-    iothread    = var.iothread_enabled
+    iothread    = var.iothread_enabled ? 1 : 0  # Convert boolean to number based on your preference
   }
 
   network {
@@ -36,7 +36,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
     bridge      = var.network_bridge
   }
 
-  ipconfig0 = "ip=${var.base_ip}${count.index + 1}/24,gw=${var.gateway}"
+  ipconfig0    = "ip=${var.base_ip}${count.index + 1}/24,gw=${var.gateway}"
   sshkeys      = var.ssh_keys
   nameserver   = var.nameserver
   cipassword   = var.cloud_init_password
@@ -44,7 +44,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
   
   lifecycle {
     ignore_changes = [
-      network, // Keeping this to avoid unnecessary updates
+      network,
     ]
   }
 
