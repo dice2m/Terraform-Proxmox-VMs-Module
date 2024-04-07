@@ -1,25 +1,29 @@
 output "vm_ids" {
-  value = [for vm in proxmox_vm_qemu.vm : vm.id]
-  description = "The IDs of the VM instances."
+  description = "List of IDs for the created VMs."
+  value       = [for vm in proxmox_vm_qemu.vm : vm.id]
+  sensitive   = false
 }
 
 output "vm_names" {
-  value = [for vm in proxmox_vm_qemu.vm : vm.name]
-  description = "The names of the VM instances."
+  description = "List of names for the created VMs."
+  value       = [for vm in proxmox_vm_qemu.vm : vm.name]
+  sensitive   = false
 }
 
-# Assuming you can extract the IP addresses from the resource. This might require adjustment based on actual resource attributes.
-output "vm_ip_addresses" {
-  value = [for vm in proxmox_vm_qemu.vm : vm.ipconfig0]
-  description = "The IP addresses of the VM instances."
+output "vm_ips" {
+  description = "List of IP addresses for the created VMs."
+  value       = [for i in range(var.vm_count) : "${var.base_ip}${i + 1}"]
+  sensitive   = false
 }
 
-output "vm_ssh_keys" {
-  value = [for vm in proxmox_vm_qemu.vm : vm.sshkeys]
-  description = "The SSH keys associated with each VM instance."
+output "ssh_public_keys" {
+  description = "SSH public keys injected into the VMs."
+  value       = var.ssh_key
+  sensitive   = true
 }
 
-output "node_allocation" {
-  value = [for vm in proxmox_vm_qemu.vm : vm.target_node]
-  description = "The Proxmox nodes each VM is allocated to."
+output "vm_target_nodes" {
+  description = "The Proxmox nodes on which the VMs are deployed."
+  value       = [for vm in proxmox_vm_qemu.vm : vm.target_node]
+  sensitive   = false
 }

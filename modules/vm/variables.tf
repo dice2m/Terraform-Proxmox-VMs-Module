@@ -1,25 +1,25 @@
 variable "vm_count" {
-  description = "The number of VM instances to create."
+  description = "The number of VMs to create."
+  type        = number
+}
+
+variable "vmid" {
+  description = "The VM ID for the virtual machine."
   type        = number
 }
 
 variable "name" {
-  description = "The name of the VM."
+  description = "The name of the virtual machine."
+  type        = string
+}
+
+variable "iso" {
+  description = "The ISO image for the virtual machine installation."
   type        = string
 }
 
 variable "target_node" {
-  description = "Target node for the VM."
-  type        = string
-}
-
-variable "vmid" {
-  description = "The VM ID for the VM."
-  type        = string
-}
-
-variable "clone" {
-  description = "The clone to use for the VM."
+  description = "The Proxmox node on which the VM is to be created."
   type        = string
 }
 
@@ -34,32 +34,22 @@ variable "sockets" {
 }
 
 variable "cpu" {
-  description = "The CPU type for the VM."
+  description = "The type of CPU for the VM."
   type        = string
 }
 
 variable "memory" {
-  description = "The amount of memory for the VM (in MB)."
+  description = "The amount of memory (in MB) for the VM."
   type        = number
 }
 
 variable "disk_size" {
-  description = "The size of the disk for the VM."
+  description = "The size of the disk for the VM (in GB)."
   type        = string
 }
 
 variable "storage" {
-  description = "The storage type for the VM."
-  type        = string
-}
-
-variable "network_model" {
-  description = "The network model for the VM."
-  type        = string
-}
-
-variable "network_bridge" {
-  description = "The network bridge for the VM."
+  description = "The storage pool to use for the VM disk."
   type        = string
 }
 
@@ -69,11 +59,16 @@ variable "base_ip" {
 }
 
 variable "gateway" {
-  description = "The gateway IP address for the VM."
+  description = "The gateway IP address for the VM network."
   type        = string
 }
 
 variable "ssh_key" {
-  description = "The SSH key to inject into the VM."
+  description = "SSH public key to inject into the VM for key-based authentication."
   type        = string
+}
+
+variable "nameserver" {
+  description = "The DNS server IP address."
+  default     = "192.168.188.1"
 }

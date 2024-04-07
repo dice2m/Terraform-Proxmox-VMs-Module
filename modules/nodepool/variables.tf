@@ -4,19 +4,18 @@ variable "vm_count" {
 }
 
 variable "vmid" {
-  description = "The starting VM ID. Subsequent VMs will have incrementing IDs."
+  description = "The starting VM ID for the VMs. Subsequent VMs will have incrementing IDs starting from this value."
   type        = number
 }
 
 variable "name_prefix" {
-  description = "The prefix for the VM names."
+  description = "Prefix for the VM names."
   type        = string
 }
 
 variable "name_format" {
-  description = "The format string to use for naming VMs, applied after the prefix."
+  description = "The format string to apply to VM names, used in conjunction with the name_prefix."
   type        = string
-  default     = "%03d"
 }
 
 variable "target_nodes" {
@@ -24,9 +23,10 @@ variable "target_nodes" {
   type        = list(string)
 }
 
-variable "template_name" {
-  description = "The VM template name to clone for creating new VMs."
+variable "iso" {
+  description = "Path to the ISO image used to install the OS on the VMs."
   type        = string
+  default     = "local:iso/your_os_image.iso" # Set a default or make this required by removing the default line.
 }
 
 variable "cores" {
@@ -69,29 +69,13 @@ variable "storage_name" {
   type        = string
 }
 
-variable "iothread_enabled" {
-  description = "Enable or disable IO threads. Set to true to enable, false to disable."
-  type        = bool
-  default     = true
-}
-
-variable "network_model" {
-  description = "The model of network device to use."
-  type        = string
-}
-
-variable "network_bridge" {
-  description = "The network bridge to attach the VM's network interface to."
-  type        = string
-}
-
 variable "base_ip" {
-  description = "The base IP address for the first VM. Subsequent VMs will increment from this base."
+  description = "The base IP address for VMs. Subsequent VMs will have IPs incremented from this base."
   type        = string
 }
 
 variable "gateway" {
-  description = "The gateway IP address for all VMs."
+  description = "The gateway IP address for the VM network."
   type        = string
 }
 
