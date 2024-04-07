@@ -34,7 +34,7 @@ resource "proxmox_vm_qemu" "k8s_node" {
     bridge = "vmbr17"
   }
 
-  ipconfig0    = "ip=${var.base_ip}${count.index + 1}/24,gw=${var.gateway}"
+  ipconfig0    = "ip=${var.base_ip}${count.index + 1}/32,gw=${var.gateway}"
   sshkeys      = var.ssh_keys  # SSH keys for VMs
   nameserver   = var.nameserver  # DNS server for VMs
   cipassword   = var.cloud_init_password  # Cloud-init password

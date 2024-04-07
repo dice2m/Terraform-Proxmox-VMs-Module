@@ -35,7 +35,7 @@ resource "proxmox_vm_qemu" "vm" {
   }
 
   # Keeping the IP configuration as you specified
-  ipconfig0    = "ip=${var.base_ip}/24,gw=${var.gateway}"
+  ipconfig0    = "ip=${var.base_ip}/32,gw=${var.gateway}"
   nameserver   = "192.168.188.1"
 
   sshkeys      = var.ssh_key
