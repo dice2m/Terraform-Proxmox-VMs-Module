@@ -9,9 +9,9 @@ output "vm_names" {
 }
 
 output "vm_ips" {
-  description = "The IP addresses of the created VMs."
-  value       = [for vm in proxmox_vm_qemu.k8s_node : format("%s%s/24", var.base_ip, vm.count.index + 1)]
+  value = [for i in range(var.vm_count) : format("%s%s/24", var.base_ip, i + 1)]
 }
+
 
 output "vm_targets" {
   description = "The target nodes on which the VMs are deployed."

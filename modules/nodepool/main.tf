@@ -40,10 +40,9 @@ resource "proxmox_vm_qemu" "k8s_node" {
   cipassword   = var.cloud_init_password  # Cloud-init password
   ciuser       = var.cloud_init_user  # Cloud-init user
   
-  cicustom = {
-    user    = base64encode(file("${path.module}/cloud-init-configs/user-data.yml")),
-    network = base64encode(file("${path.module}/cloud-init-configs/network-config.yml"))
-  }
+  cicustom = jsonencode({
+    user    = file("${path.module}/cloud-init-configs/user-data.yaml"),
+  })
 
   lifecycle {
     ignore_changes = [network,]

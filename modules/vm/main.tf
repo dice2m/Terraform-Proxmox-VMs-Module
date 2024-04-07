@@ -40,9 +40,9 @@ resource "proxmox_vm_qemu" "vm" {
 
   sshkeys      = var.ssh_key
 
-  cicustom = {
-    user = base64encode(file("${path.module}/cloud-init/user-data.yml"))
-  }
+  cicustom = jsonencode({
+    user    = file("${path.module}/cloud-init-configs/user-data.yaml"),
+  })
 
   lifecycle {
     ignore_changes = [network,]
